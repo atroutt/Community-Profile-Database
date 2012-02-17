@@ -1,0 +1,109 @@
+<span xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags">
+    <jsp:directive.attribute name="researcher" type="edu.drexel.goodwin.cpd.dto.ResearcherDto" required="true" description="The researcher who should be displayed"/>
+    <div> 
+	<script type="text/javascript">dojo.require('dijit.form.TextBox');dojo.require('dijit.form.ValidationTextBox');dojo.require('dijit.form.MultiSelect');</script>
+	<c:url value="/resources/ckeditor/ckeditor.js" var="ckeditorUrl" />
+	<script type="text/javascript" src="${ckeditorUrl}" ><!-- //required for FF3 and Opera --></script>
+    </div>
+    <div id="roo_researcher_firstName">
+        <label for="_firstName_id">First Name:</label>
+        <form:input cssStyle="width:350px" id="_firstName_id" path="firstName"/>
+        <spring:message arguments="FirstName" code="field.invalid" var="field_invalid"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message argumentSeparator="," arguments="First Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_firstName_id", widgetType: 'dijit.form.ValidationTextBox', widgetAttrs: {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_firstName_error_id" path="firstName"/>
+    </div>
+    <br/>
+    <div id="roo_researcher_lastName">
+        <label for="_lastName_id">Last Name:</label>
+        <form:input cssStyle="width:350px" id="_lastName_id" path="lastName"/>
+        <spring:message arguments="Last Name" code="field.invalid" var="field_invalid"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message argumentSeparator="," arguments="Last Name,(${field_required})" code="field.simple.validation" var="field_validation"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_lastName_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_lastName_error_id" path="lastName"/>
+    </div>
+    <br/>
+    <div id="roo_researcher_jobTitle">
+        <label for="_jobTitle_id">Job Title:</label>
+        <form:input cssStyle="width:350px" id="_jobTitle_id" path="jobTitle"/>
+        <spring:message arguments="Job Title" code="field.invalid" var="field_invalid"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message argumentSeparator="," arguments="Job Title,(${field_required})" code="field.simple.validation" var="field_validation"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_jobTitle_id", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_jobTitle_error_id" path="jobTitle"/>
+    </div>
+    <br/>
+    <div id="roo_researcher_organization">
+        <label for="_organization_id">Organization:</label>
+        <form:input cssStyle="width:350px" id="_organization_id" path="organization"/>
+        <spring:message arguments="Organization" code="field.invalid" var="field_invalid"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message argumentSeparator="," arguments="Organization,(${field_required})" code="field.simple.validation" var="field_validation"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_organization_id', widgetType: 'dijit.form.ValidationTextBox', widgetAttrs: {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_organization_error_id" path="organization"/>
+    </div>
+    <br/>
+    <div id="roo_researcher_website">
+        <label for="_website_id">Website: <br /><small>e.g. http://drexel.edu</small></label>
+        <form:input cssStyle="width:350px" id="_website_id" path="website"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_website_id', widgetType: 'dijit.form.ValidationTextBox', widgetAttrs: {promptMessage: "If you have a website, enter it here. Please include http://"}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_website_error_id" path="website"/>
+    </div>
+    <br/>
+    <br/>
+    <div id="roo_researcher_email">
+        <label for="_email_id">Email:</label>
+        <form:input cssStyle="width:350px" id="_email_id" path="email"/>
+        <spring:message code="field.invalid.email" var="field_invalid"/>
+        <spring:message code="field.required" var="field_required"/>
+        <spring:message argumentSeparator="," arguments="Email,(${field_required})" code="field.simple.validation" var="field_validation"/>
+        <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : "_email_id", widgetType : "dijit.form.ValidationTextBox", widgetAttrs : {promptMessage: "${field_validation}", invalidMessage: "${field_invalid}", required : true}})); </script>
+        <br/>
+        <form:errors cssClass="errors" id="_email_error_id" path="email"/>
+    </div>
+    <br/>
+    <div id="roo_researcher_interests">
+        <c:if test="${not empty interests}">
+            <label for="_interests_id">Interests:<br/><br/>To select multiple interests hold down the CTRL key while you click (use command key on a Mac).</label>
+            <form:select cssStyle="overflow:auto;width:350px;height:160px;" id="_interests_id" path="interests" multiple="true">
+                <form:options itemValue="id" items="${interests}"/>
+            </form:select>
+        </c:if>
+    </div>
+    <br/>
+    <div id="roo_researcher_skills">
+        <c:if test="${not empty skills}">
+            <label for="_skills_id">Skills:<br/><br/>To select multiple skills hold down the CTRL key while you click (use command key on a Mac).</label>
+            <form:select cssStyle="overflow:auto;width:350px;height:160px;" id="_skills_id" path="skills"  multiple="true">
+                <form:options itemValue="id" items="${skills}"/>
+            </form:select>
+       </c:if>
+    </div>
+    <br/>
+	<div id="roo_researcher_bibliography">
+	    <label for="_bibliography_id">Working Bibliography:</label>
+	    <div style="margin-left:9em;">
+	    <form:textarea cssStyle="width:350px;height: 200px;" id="_bibliography_id" path="bibliography" />
+	    </div>
+		<br/>
+        <form:errors cssClass="errors" id="_bibliography_error_id" path="bibliography"/>
+	</div>
+	<br/>
+	<div id="roo_researcher_uploadedPicture">
+		<label for="_uploadedPicture_id">Profile Picture:</label>
+		<input type="file" path="uploadedPicture" id="_uploadedPicture_id" name="uploadedPicture" />
+    </div>
+    <br/>
+<script type="text/javascript">
+//<![CDATA[
+	CKEDITOR.replace( '_bibliography_id' );
+//]]>
+</script>
+</span>

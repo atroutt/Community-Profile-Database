@@ -1,0 +1,5 @@
+<div xmlns:spring="http://www.springframework.org/tags"  xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:security="http://www.springframework.org/security/tags" >	
+    <div id="_title_div">
+		<roo:privacyPolicy />
+	</div>
+</div>

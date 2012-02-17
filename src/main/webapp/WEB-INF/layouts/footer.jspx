@@ -1,0 +1,14 @@
+<div  class="footer" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:security="http://www.springframework.org/security/tags" xmlns:spring="http://www.springframework.org/tags">
+	<span style="float: left">
+		<c:url var="home" value="/" />
+        <a href="${home}">Home</a> |          	
+		<c:url value="/contact" var="contact" />
+		<a href="${contact}">Contact Us</a> |  
+		<c:url value="/termsOfUse" var="TC" />
+		<a href="${TC}">Terms of Use</a> |
+		<c:url value="/privacyPolicy" var="PP" />
+		<a href="${PP}">Privacy Policy</a> 
+	</span>
+	<spring:message code="global.sponsored" var="sponsored" /> 
+	<span style="float: right">${sponsored}</span>
+</div>

@@ -1,0 +1,63 @@
+<div xmlns:jsp="http://java.sun.com/JSP/Page" 
+xmlns:c="http://java.sun.com/jsp/jstl/core" 
+xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+xmlns:form="http://www.springframework.org/tags/form" 
+xmlns:spring="http://www.springframework.org/tags">
+<jsp:directive.attribute name="researcher" type="edu.drexel.goodwin.cpd.dto.ResearcherDto" required="true" description="The researcher who should be displayed"/>
+    <div id="_title_div">
+        <h1>Researcher Profile</h1>
+        <c:if test="${not empty researcher}">
+        	<c:if test="${researcher.hasProfilePicture}">
+        		<c:url var="profilePictureUrl" value="/researcher/profilePicture/${researcher.id}" />
+        		<img src="${profilePictureUrl}" class="align-right frame" alt="" width="${researcher.profilePictureWidth}" height="${researcher.profilePictureHeight}"/>
+        	</c:if>
+            <div id="roo_researcher_name">
+                <label for="_name">Name:</label>
+                <div class="box" id="_name">${researcher.firstName} ${researcher.lastName}</div>
+            </div>
+            <br/>
+            <div id="roo_researcher_jobTitle">
+                <label for="_jobTitle">Job Title:</label>
+                <div class="box" id="_jobTitle">${researcher.jobTitle}</div>
+            </div>
+            <br/>
+            <div id="roo_researcher_organization">
+                <label for="_organization">Organization:</label>
+                <div class="box" id="_organization">${researcher.organization}</div>
+            </div>
+            <br/>
+            <c:if test="${not empty researcher.website}">
+            <div id="roo_researcher_website">
+                <label for="_website">Website:</label>
+                <div class="box" id="_website"><a href="${researcher.website}" target="_blank">${researcher.website}</a></div>
+            </div>
+            <br/>
+            </c:if>
+            <div id="roo_researcher_email">
+                <label for="_email">Email:</label>
+                <div class="box" id="_email"><a href="mailto:${researcher.email}">Send Email</a></div>
+            </div>
+            <br/>
+            <div id="roo_researcher_interests">
+                <label for="_interests">Interests:</label>
+                <div class="box" id="_interests">${fn:substringAfter(fn:substringBefore(researcher.interests, "]"), "[")}</div>
+            </div>
+            <br/>
+            <div id="roo_researcher_skills">
+                <label for="_skills">Skills:</label>
+                <div class="box" id="_skills">${fn:substringAfter(fn:substringBefore(researcher.skills, "]"), "[")}</div>
+            </div>
+            <br/>
+            <div id="roo_researcher_bibliography">
+                <label for="_bibliography">Working bibliography:</label>
+                <div class="box" id="_bibliography">${researcher.bibliography}</div>
+            </div>
+            <br/>
+            <br/>
+        </c:if>
+        <c:if test="${empty researcher}">
+            <spring:message arguments="${entity_label}" code="entity.not.found.single"/>
+        </c:if>
+    </div>
+ </div>

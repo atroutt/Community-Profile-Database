@@ -1,0 +1,4 @@
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:roo="urn:jsptagdir:/WEB-INF/tags" xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <h1>Success!</h1>
+    <p>Your message has been sent to the Community Profile Database Administrators.</p>
+</div>

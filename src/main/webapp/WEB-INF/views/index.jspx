@@ -1,0 +1,22 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:security="http://www.springframework.org/security/tags" >	
+    <div id="_title_div">
+    	<spring:message var="title" code="welcome.titlepane" />
+		<h1><spring:message code="welcome.h3" /></h1>
+		<p>Welcome to the Community Profile Database. This database serves as a
+		central location for faculty, practitioners, and students to network 
+		with one another concerning research opportunities and potential research partnerships.</p>
+		
+		<p>If this is your first time on the site, please take a few moments
+		to register yourself as a user by providing your list of interests and
+		abilities. This will help other researchers locate you based on your preferences and 
+		skills. In addition, you will have the opportunity to provide a working
+		bibliography and upload a professional photo of yourself to complete
+		your profile. While the photo helps us personalize the site and provide
+		name/face recognition, the working bibliography further assists those
+		searching for research partners in locating people with similar
+		interests and relevant skills.</p>
+		
+		<p>Please contact the site administrators with any feedback or
+		suggestions you may have about this research database.</p>
+	</div>
+</div>

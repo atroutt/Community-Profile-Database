@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="researcher/list">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/list.jspx"/>
+    </definition>
+    <definition extends="default" name="researcher/show">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/show.jspx"/>
+    </definition>
+    <definition extends="default" name="researcher/create">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/create.jspx"/>
+    </definition>
+    <definition extends="default" name="researcher/password">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/password.jspx"/>
+    </definition>
+    <definition extends="default" name="researcher/created">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/created.jspx"/>
+    </definition>
+    <definition extends="default" name="researcher/update">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/update.jspx"/>
+    </definition>
+	<definition extends="default" name="researcher/findResearchersByInterests">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/findResearchersByInterests.jspx"/>
+    </definition>
+	<definition extends="default" name="researcher/findResearchersBySkillsAndInterests">
+        <put-attribute name="body" value="/WEB-INF/views/researcher/findResearchersBySkillsAndInterests.jspx"/>
+    </definition>
+</tiles-definitions>

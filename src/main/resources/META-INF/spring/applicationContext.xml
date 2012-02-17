@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:context="http://www.springframework.org/schema/context" xmlns:jee="http://www.springframework.org/schema/jee" xmlns:security="http://www.springframework.org/schema/security" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/aop  http://www.springframework.org/schema/aop/spring-aop-2.5.xsd    http://www.springframework.org/schema/beans  http://www.springframework.org/schema/beans/spring-beans-2.5.xsd    http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context-2.5.xsd    http://www.springframework.org/schema/jee  http://www.springframework.org/schema/jee/spring-jee-2.5.xsd    http://www.springframework.org/schema/security  http://www.springframework.org/schema/security/spring-security-3.0.xsd http://www.springframework.org/schema/tx  http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- Turn on AspectJ @Configurable support -->
+	<context:spring-configured/>
+
+	<context:component-scan base-package="edu.drexel.goodwin.cpd">
+		<context:exclude-filter expression=".*_Roo_.*" type="regex"/>
+		<context:exclude-filter expression="org.springframework.stereotype.Controller" type="annotation"/>
+	</context:component-scan>
+	
+	<security:global-method-security pre-post-annotations="enabled"/>
+	
+    <bean class="org.springframework.orm.jpa.JpaTransactionManager" id="transactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+    
+    <tx:annotation-driven mode="aspectj" transaction-manager="transactionManager"/>
+    
+    <bean class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" id="entityManagerFactory">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+    
+    <bean class="org.springframework.security.authentication.dao.DaoAuthenticationProvider" id="daoAuthenticationProvider">
+		  <property name="userDetailsService" ref="researcherDetailsService"/>
+		  <property name="saltSource" ref="saltSource"/>
+		  <property name="passwordEncoder" ref="passwordEncoder"/>
+	</bean>
+	
+    <bean class="org.springframework.security.authentication.dao.ReflectionSaltSource" id="saltSource">
+		<property name="userPropertyToUse" value="getSalt"/>
+	</bean>
+    
+    <bean class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" id="passwordEncoder">
+    </bean>
+    
+    <bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="mailSender">
+        <property name="host">
+        	<jee:jndi-lookup jndi-name="java:comp/env/cpdEmailHost" />	
+        </property>
+    </bean>
+    
+    <bean class="org.springframework.mail.SimpleMailMessage" id="templateMessage">
+        <property name="from" value="${email.from}"/>
+    </bean>
+
+    <bean class="java.lang.String" id="applicationUrl">
+    	<constructor-arg>
+	    	<jee:jndi-lookup jndi-name="java:comp/env/cpdApplicationUrl"  default-value="http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd"/>	
+    	</constructor-arg>
+    </bean>
+    
+    <bean id="reCaptcha" class="net.tanesha.recaptcha.ReCaptchaImpl">
+		<property name="privateKey" value="RECAPTCHAPRIVATEKEY" />
+		<property name="publicKey" value="RECAPTCHAPUBLICKEY" />
+		<property name="recaptchaServer" value="http://www.google.com/recaptcha/api" />
+		<property name="includeNoscript" value="false" />
+	</bean>
+</beans>

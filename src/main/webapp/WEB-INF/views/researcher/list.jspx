@@ -1,0 +1,67 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" 
+xmlns:fmt="http://java.sun.com/jsp/jstl/fmt" 
+xmlns:security="http://www.springframework.org/security/tags" 
+xmlns:fn="http://java.sun.com/jsp/jstl/functions" 
+xmlns:form="http://www.springframework.org/tags/form" 
+xmlns:roo="urn:jsptagdir:/WEB-INF/tags" 
+xmlns:spring="http://www.springframework.org/tags">
+    <div id="_title_div">
+        <h1>Researchers</h1>
+        <c:if test="${not empty researchers}">
+            <table width="300px">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Job Title, Organization</th>
+                        <th>Interests</th>
+                        <th>Skills</th>
+                    </tr>
+                </thead>
+                <c:forEach items="${researchers}" var="researcher">
+                    <tr>
+                        <td>
+	                        <spring:url value="/researcher/${researcher.id}" var="show_form_url"/>
+                        	<a href="${show_form_url}" title="View Researcher Profile">${researcher.firstName} ${researcher.lastName}</a>
+                       		<security:authorize ifAllGranted="ROLE_ADMIN">
+	                        	<br />id: ${researcher.id}
+	                            <spring:url value="/researcher/${researcher.id}/form" var="update_form_url"/>
+	                            <spring:url value="/static/images/update.png" var="update_image_url"/>
+	                            <form:form action="${update_form_url}" method="GET" cssStyle="display:inline;">
+	                                <input alt="Edit Researcher" class="image" src="${update_image_url}" title="Edit Researcher" type="image" value="${update_label}"/>
+	                            </form:form>
+	                            <spring:url value="/researcher/${researcher.id}" var="delete_form_url"/>
+	                            <spring:url value="/static/images/delete.png" var="delete_image_url"/>
+	                            <form:form action="${delete_form_url}" method="DELETE" cssStyle="display:inline;">
+	                                <input alt="Delete Researcher" class="image" src="${delete_image_url}" title="Delete Researcher" type="image" value="${delete_label}"/>
+	                            </form:form>
+	                        </security:authorize>
+                        </td>
+                        <td>${researcher.jobTitle},<br/>${researcher.organization}</td>
+                        <td>${fn:substringAfter(fn:substringBefore(researcher.interests, "]"), "[")}</td>
+                        <td>${fn:substringAfter(fn:substringBefore(researcher.skills, "]"), "[")}</td>
+                    </tr>
+                </c:forEach>
+                <tr class="footer">
+                    <td colspan="10">
+                        <security:authorize ifAllGranted="ROLE_ADMIN">
+                        <span class="new">
+                            <spring:url value="/researcher/form" var="create_url"/>
+                            <a href="${create_url}">
+                                <spring:url value="/static/images/add.png" var="create_img_url"/>
+                                <spring:message arguments="${entity_label}" code="global.menu.new" var="add_message"/>
+                                <img alt="${add_message}" src="${create_img_url}" title="${add_message}"/>
+                            </a>
+                        </span>
+                        </security:authorize>
+                        <c:if test="${not empty maxPages}">
+							<roo:pagination maxPages="${maxPages}" page="${param.page}" size="${param.size}" skillSet="${skillSet}" interestSet="${interestSet}" />
+                        </c:if>
+                    </td>
+                </tr>
+            </table>
+        </c:if>
+        <c:if test="${empty researchers}">
+            <p>Search returned no results.</p>
+        </c:if>
+    </div>
+</div>

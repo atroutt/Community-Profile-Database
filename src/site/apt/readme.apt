@@ -1,0 +1,99 @@
+Developing the Application
+
+	This project was built using the SpringSource Toolsuite development environment ({{http://www.springsource.com/products/sts}}) with:  
+
+      * Java version: 1.6.0_15 
+
+      * Spring 3.0.0 RC 1
+
+      * Spring Roo 1.0.0.RELEASE
+
+      * Apache Maven 2.2.1 (rdebian-1)
+
+      * Roo 1.0.0.RELEASE [rev 564]
+      
+	  []
+	      
+	To run the tests you will need a postgres database. We used PostgreSQL 8.4.2
+	
+	To build the application from source you will at least need Java and Maven installed. For development work on the project you will need Roo installed and we recommend the STS development environment. More information and downloads available at http://www.springsource.org/roo
+	
+	To build the application you either need to use maven commands "mvn package" or open a Roo shell in the root directory of this project and use the "perform package" command. Roo uses maven for building and dependency management so you will also have to install Maven either way.
+	
+	Maven will handle downloading the correct dependencies for you.
+	
+	To run the tests you can use the mvn test command or perform test from a Roo shell. You will need to have a test database (postgres). See META-INF/spring/database.properties for info about where to put the test database config file.
+	
+Build and Installation process
+
+	This application needs a postgresql database and an application server to run in. Tomcat is not required, but that is what has been used. The application was tested it using these versions: PostgreSQL 8.4.2, Apache Tomcat 6.0.16
+		
+	The following are the steps to build and deploy the application assuming you already have Java, Maven, Tomcat and Postresql installed correctly and have a copy of the source code:
+ 
+      * Replace placeholders with your actual configuration information and desired app name.
+      
+    	We have used these placeholders at various places in the code and below in the sample tomcat config:
+    	
+            * WHERETHEAPPLICATIONWILLBEHOSTED - should be the domain where your application will be hosted. For example localhost:8080 or goodwin.drexel.edu
+            
+            * YOURMAILSERVER - your mailserver
+            
+            * DBURL, DBUSERNAME, DBPASSWORD - the postgres database url, username and password
+            
+            * RECAPTCHAPRIVATEKEY - your private key from http://www.google.com/recaptcha
+            
+            * RECAPTCHAPUBLICKEY- your public key from http://www.google.com/recaptcha
+            
+            []
+            
+		  These will all need to be replaced with real values before you can successfully launch the application.
+		  
+      * You will want to edit src/main/resources/META-INF/spring/email.properties to set the email from address and admin emails.
+    	
+      * If you rename the app you may want to change the banner and favicon. You can find these at src/main/webapp/images/banner-graphic.png and src/main/webapp/images/favicon.png
+    	
+      * You may also want to change the name of the application. Throughout the code we have referred to the application as "Community Profile Database". If you would like to use a different app name for the publicly visible pages you should be able to find and replace that string.
+    	
+      * When deployed the app url will be http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd by default. If you would like to change this edit the finalName in pom.xml
+	
+	* Create a postgresql database for the application. Remember the database name, the url of the database and the username and password of the database owner.
+	
+		Assuming you are logged in as the postgres user and are in the psql client you can use these commands:
+		      
++------------------------------------------+	        
+postgres=# create user DBUSERNAME with password 'DBPASSWORD';
+postgres=# create database DBNAME;
+postgres=# grant all on database DBNAME to DBUSERNAME;
++------------------------------------------+		
+
+		(the DBNAME is the end part of the DBURL)
+		
+		Run the createschema.sql script to create the schema for your new database. Note: you will need to change the DBUSERNAME in that script first.
+			
+      * Generate the war file. If you have installed maven correctly the command "mvn test" will run the tests and "mvn package" will generate the war file for your to deploy. You should be in the root of the project folder when you execute these commands. Alternatively you could open a Roo shell in the root of the source code directory and enter the commands "perform test" to run the tests and "perform package" to create a war file named cpd.war in the target directory
+      
+      * Copy the war file to your tomcat webapps directory.
+      
+      * Edit your server.xml file to add these settings inside the GlobalNamingResources tags. You will want to use your own environment info (YOURMAILSERVER, WHERETHEAPPLICATIONWILLBEHOSTED) and database connection information (DBPASSWORD, DBUSERNAME, DBURL):
+
++------------------------------------------+
+<Resource
+   auth="Container"
+   driverClassName="org.postgresql.Driver"
+   maxActive="100"
+   maxIdle="30"
+   maxWait="10000"
+   name="jdbc/CpdDataSource"
+   password="DBPASSWORD"
+   type="javax.sql.DataSource"
+   url="jdbc:postgresql://DBURL"
+   username="DBUSERNAME"
+ />
+
+ <Environment name="cpdEmailHost"            type="java.lang.String" value="YOURMAILSERVER"/>
+ <Environment name="cpdApplicationUrl"            type="java.lang.String" value="http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd"/>
+ <Environment name="cpdHibernateHbm2DdlAuto"            type="java.lang.String" value="validate"/>
+ <Environment name="cpdHibernateDialect"            type="java.lang.String" value="org.hibernate.dialect.PostgreSQLDialect"/>
++------------------------------------------+
+
+      * When your tomcat server starts up you should be able to see the application at http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd

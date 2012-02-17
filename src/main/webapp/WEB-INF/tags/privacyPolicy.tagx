@@ -1,0 +1,55 @@
+<div xmlns:spring="http://www.springframework.org/tags" xmlns:security="http://www.springframework.org/security/tags" >	
+	<h1>Privacy Policy</h1>
+
+	<p>Your privacy is very important to us. Accordingly, we have developed this Policy in order for 
+	you to understand how we collect, use, communicate and disclose and make use of personal information. 
+	The following outlines how we will handle information that we learn about you from your visit to our Web site. The information we receive depends upon what you do when visiting our site.</p>
+
+	<p>If you visit our site to read or download public information from our Web pages:</p>
+
+	<ul>
+		<li>We collect and keep track of only the following information about you: the name of the domain 
+		from which you access the Internet (for example, aol.com); the date and time you access our site; 
+		and the Internet address of the Web site from which you linked directly to our site. We may use 
+		your IP address to help diagnose problems with our server, and to administer our Web site. Your 
+		IP address may also be used to customize the information that you receive in order to make it most 
+		relevant to you.</li>
+		<li>We use the information we collect to measure the number of visitors to the different sections 
+		of our site, to help us make our site more useful to visitors, and to place advertisements and 
+		sponsorships that enable us to continue to offer our services free of charge.</li>
+	</ul>	
+
+	<p>If you identify yourself by sending an email or by creating an account in order to join the Community Profile Database:</p>
+
+	<ul>
+		<li>We use personal identifying information from users in various ways to provide the services and
+		 support you seek. We use your email address in order to respond to your questions and to notify 
+		 you of changes to your profile.</li>
+		<li>From time to time we may conduct surveys of users for the purpose of evaluating the use of our 
+		Web site, and we may use your information to contact you for more information.</li>
+	</ul>
+
+	<p>At any time you may request the removal of your name or other personal information and contributions
+	 by e-mailing us using the contact us form.</p>	
+	
+	<p>We want to be very clear: We will not obtain personal identifying information about you when you 
+	visit our site unless you choose to provide such information to us.</p>
+	
+	<p>We do not sell or rent our customer names, addresses, or other information to third parties for any
+	 purpose.</p>
+	
+	<p>This site contains links to other sites. The Community Profile Database is not responsible for the privacy practices
+	 or the content of such Web sites.</p>
+	
+	<h2>Your profile</h2>
+	
+	<p>By design, this site makes your information available to other registered users, including your
+	 email address. Please remember that any information that is disclosed in your profile becomes 
+	 available to all other registered users, and that you should exercise caution when deciding to 
+	 disclose your personal information. The Community Profile Database reserves the right to remove any 
+	 information that its administrators consider inappropriate.</p>
+	
+	<p>If you have any questions about this privacy statement, the practices of this site, or your 
+	dealings with this Web site, please contact us using the contact form below.</p>
+
+</div>

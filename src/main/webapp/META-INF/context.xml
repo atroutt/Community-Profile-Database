@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Context reloadable="true">
+	<ResourceLink name="cpdEmailHost"	global="cpdEmailHost" type="java.lang.String" />
+	<ResourceLink name="cpdApplicationUrl"	global="cpdApplicationUrl"	type="java.lang.String" />
+	<ResourceLink name="hibernate.hbm2ddl.auto"	global="cpdHibernateHbm2DdlAuto"	type="java.lang.String" />
+	<ResourceLink name="hibernate.dialect"	global="cpdHibernateDialect"	type="java.lang.String" />
+	<ResourceLink name="jdbc/CpdDataSource" global="jdbc/CpdDataSource" type="javax.sql.DataSource"/> 
+</Context>

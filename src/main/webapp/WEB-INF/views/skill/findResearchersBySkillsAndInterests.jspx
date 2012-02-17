@@ -1,0 +1,38 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:spring="http://www.springframework.org/tags">
+    <script type="text/javascript">dojo.require("dijit.form.MultiSelect");</script>
+    <div id="_title">
+        <spring:message arguments="Find Researchers By Skills And Interests" code="entity.find" var="title"/>
+        <c:url value="/skill/find/BySkillsAndInterests" var="form_url"/>
+        <form:form action="${form_url}" method="GET">
+            <div id="roo_researcher_skills">
+                <c:if test="${not empty skills}">
+                    <label for="_skills">Skills:</label>
+                    <select id="_skills" name="skills" style="width:250px">
+                        <c:forEach items="${skills}" var="skills_item">
+                            <option value="${skills_item.id}">${skills_item}</option>
+                        </c:forEach>
+                    </select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_skills', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div id="roo_researcher_interests">
+                <c:if test="${not empty interests}">
+                    <label for="_interests">Interests:</label>
+                    <select id="_interests" name="interests" style="width:250px">
+                        <c:forEach items="${interests}" var="interests_item">
+                            <option value="${interests_item.id}">${interests_item}</option>
+                        </c:forEach>
+                    </select>
+                    <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_interests', widgetType: 'dijit.form.MultiSelect', widgetAttrs: {}})); </script>
+                </c:if>
+            </div>
+            <br/>
+            <div class="submit" id="roo_researcher_submit">
+                <spring:message code="button.find" var="find_button"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="${find_button}"/>
+            </div>
+        </form:form>
+    </div>
+</div>

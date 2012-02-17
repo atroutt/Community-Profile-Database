@@ -1,0 +1,78 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:roo="urn:jsptagdir:/WEB-INF/tags"  xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <script type="text/javascript">dojo.require("dijit.Dialog");dojo.require('dijit.form.SimpleTextarea');dojo.require('dijit.form.ValidationTextBox');dojo.require('dijit.form.MultiSelect');</script>
+    <div id="_title_div" >
+        <spring:url value="/researcher" var="form_url"/>
+        <h1>Create Your Profile</h1>
+        <form:form action="${form_url}" method="POST" modelAttribute="researcher" enctype="multipart/form-data">
+            <div>
+                <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+	            <roo:researcherFormFields researcher="${researcher}" />
+	            <div id="roo_researcher_password">
+	                <label for="_password_id">Create Password (min. 5 characters):</label>
+	                <form:password cssStyle="width:350px" id="_password_id" path="password"/>
+	                <form:errors cssClass="errors" id="_password_error_id" path="password"/>
+	                <spring:message arguments="Password" code="field.invalid" var="field_invalid"/>
+	                <spring:message code="field.required" var="field_required"/>
+	                <spring:message argumentSeparator="," arguments="Password,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_password_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	                <br/>
+	            </div>
+	            <br/>
+	            <br/>
+	            <div id="roo_researcher_passwordConfirm">
+	                <label for="_passwordConfirm_id">Confirm Password:</label>
+	                <form:password cssStyle="width:350px" id="_passwordConfirm_id" maxlength="30" path="passwordConfirm" size="0"/>
+	                <br/>
+	                <form:errors cssClass="errors" id="_passwordConfirm_error_id" path="passwordConfirm"/>
+	                <spring:message arguments="Password Confirm" code="field.invalid" var="field_invalid"/>
+	                <spring:message code="field.required" var="field_required"/>
+	                <spring:message argumentSeparator="," arguments="Password Confirm,(${field_required})" code="field.simple.validation" var="field_validation"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_passwordConfirm_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : false}})); </script>
+	            </div>
+	            <br/>  
+	        	<script>
+				var RecaptchaOptions = {
+			   		theme : 'white'
+				};
+				</script>
+	            <br/>  
+	            ${captcha}          
+	            <br/>  
+
+	            <br/>
+	            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+	            <div class="submit" id="roo_researcher_submit">
+	                <spring:message code="button.save" var="save_button"/>
+	                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+	                <input id="proceed" type="submit" value="${save_button}" />
+	                <c:url value="/termsOfUse" var="termsUrl"/>
+		            <c:url value="/privacyPolicy" var="privacyUrl"/>
+	                <c:url var="home" value="/" />
+	               	By pressing save you accept the <a href="${termsUrl}" id="termsAnchor" target="_blank" onclick="dijit.byId('TermsOfUse').show()">Terms of Use</a> and <a id="privacyAnchor" href="${privacyUrl}" target="_blank" onclick="dijit.byId('PrivacyPolicy').show()">Privacy Policy</a> for the Community Profile Database.
+	               	<br/>
+	               	<br/>
+	               	<a href="${home}">Cancel</a>
+	            </div>
+	            
+	            <div id="TermsOfUse" title="Terms and Conditions of Use" style="display:none;width:400px">
+	            	<roo:termsOfUse />
+				</div>
+				<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : 'TermsOfUse', widgetType : 'dijit.Dialog', widgetAttrs : {}})); </script>
+				
+	            <div id="PrivacyPolicy" title="Privacy Policy" style="display:none;width:400px">
+	            	<roo:privacyPolicy />
+				</div>
+				<script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : 'PrivacyPolicy', widgetType : 'dijit.Dialog', widgetAttrs : {}})); </script>
+            </div>
+        </form:form>
+	    <script type="text/javascript">
+	    /* <![CDATA[ */ 
+	    document.getElementById("termsAnchor").removeAttribute("target");
+	    document.getElementById("termsAnchor").removeAttribute("href");
+	    document.getElementById("privacyAnchor").removeAttribute("target");
+	    document.getElementById("privacyAnchor").removeAttribute("href");
+	    /* ]]> */
+	    </script>
+    </div>
+</div>

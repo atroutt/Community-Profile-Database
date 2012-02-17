@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN" "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition extends="default" name="skill/list">
+        <put-attribute name="body" value="/WEB-INF/views/skill/list.jspx"/>
+    </definition>
+    <definition extends="default" name="skill/show">
+        <put-attribute name="body" value="/WEB-INF/views/skill/show.jspx"/>
+    </definition>
+    <definition extends="default" name="skill/create">
+        <put-attribute name="body" value="/WEB-INF/views/skill/create.jspx"/>
+    </definition>
+    <definition extends="default" name="skill/update">
+        <put-attribute name="body" value="/WEB-INF/views/skill/update.jspx"/>
+    </definition>
+    <definition extends="default" name="skill/findResearchersBySkillsAndInterests">
+        <put-attribute name="body" value="/WEB-INF/views/skill/findResearchersBySkillsAndInterests.jspx"/>
+    </definition>
+</tiles-definitions>

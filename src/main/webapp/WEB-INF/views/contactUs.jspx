@@ -1,0 +1,43 @@
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:form="http://www.springframework.org/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:output omit-xml-declaration="yes"/>
+    <div id="_title_div">
+    	<h1>Contact the Community Profile Database Administrators</h1>
+        <spring:url value="/contact" var="form_url"/>
+        <form:form action="${form_url}" method="POST" modelAttribute="contact">
+            <form:errors cssClass="errors" delimiter="&lt;p/&gt;"/>
+            <div id="roo_contact_fromEmail">
+                <label for="_fromEmail_id">Your Email:</label>
+                <form:input cssStyle="width:350px" id="_fromEmail_id" maxlength="30" path="fromEmail" size="0"/>
+                <br/>
+                <form:errors cssClass="errors" id="_fromEmail_error_id" path="fromEmail"/>
+                <spring:message arguments="From Email" code="field.invalid" var="field_invalid"/>
+                <spring:message code="field.required" var="field_required"/>
+                <spring:message argumentSeparator="," arguments="From Email," code="field.simple.validation" var="field_validation"/>
+                <script type="text/javascript">Spring.addDecoration(new Spring.ElementDecoration({elementId : '_fromEmail_id', widgetType : 'dijit.form.ValidationTextBox', widgetAttrs : {promptMessage: '${field_validation}', invalidMessage: '${field_invalid}', required : true}})); </script>
+            </div>
+            <br/>
+            <div id="roo_contact_subject">
+                <c:if test="${not empty subjects}">
+                <label for="_subject_id">Subject:</label>
+                <form:select cssStyle="width:350px" id="_subject_id" path="subject" multiple="false" >
+                    <form:options itemValue="name" items="${subjects}"/>
+                </form:select>
+                <form:errors cssClass="errors" id="_subject_error_id" path="subject"/>
+                </c:if>
+            </div>
+            <br/>
+            <br/>
+            <div id="roo_contact_userMessage">
+                <label for="_userMessage_id">Message:</label>
+                <form:textarea cssStyle="width:350px;height:200px" id="_userMessage_id" path="userMessage" />
+                <br/>
+                <form:errors cssClass="errors" id="_userMessage_error_id" path="userMessage"/>
+            </div>
+            <br/>
+            <div class="submit" id="roo_contact_submit">
+                <script type="text/javascript">Spring.addDecoration(new Spring.ValidateAllDecoration({elementId:'proceed', event:'onclick'}));</script>
+                <input id="proceed" type="submit" value="Send Message"/>
+            </div>
+        </form:form>
+    </div>
+</div>

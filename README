@@ -1,0 +1,169 @@
+Community Profile Database Application
+
+------
+LICENSE
+------
+Copyright (c) 2011, Goodwin College at Drexel University
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+Neither the name of Goodwin College nor Drexel University nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+------
+
+1. Overview of application
+
+	The Community Profile Database is a web site where members can find each other based on interests and skill sets. This framework can be expanded to have other information about members as well. Originally this application was designed for a community of researchers, so you will see the word researcher below and in the code where the word mentor might be more fitting.
+	
+	Summary of Pages
+	The following is a list of all of the pages of the application. Additionally there will be a template wrapping all of the pages on the top, right and bottom.
+
+          * The top has the site title
+          * The right side of the template should have a menu with these items (some of which you will be required to log in to go to):
+                o sign up
+                o list all researchers
+                o find by skill and interest
+                o view/edit my profile
+                o log in/log out
+          * The bottom of the template is the footer with links to Contact us, etc.
+
+   1.1 Welcome Page /index.html
+
+          o You do not need to log in to see this page
+          o This page has a welcome message and there is a menu to sign up or start searching
+
+   1.2 Researcher Registration Page /researcher/form
+
+          o You do not need to log in to see this page
+          o This page is a web form that includes a field for your name, email address, url, organization, title, bibliography, interests, skills and a password. You can also optionally add a picture for your profile.
+          o When you click on submit it will send you an email confirmation and take you to a researcher profile created page
+
+   1.3. Researcher Profile Created Page /researcher/<someResearcherId>
+
+          o You do not need to log in to see this page
+          o This page shows you all of the information that you provided when you signed up. It also lets you know that an email was sent with your login information reminder.
+
+   1.4. Login in page /login
+
+          o This page will take your email address and password and log you in to the application.
+
+   1.5. Researcher Profile Edit Page /researcher/<someResearcherId>/form
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o This page is only accessible to the profile owner and any site admin. Anyone else will get an access denied message
+          o This page looks like the Researcher Registration Page except that your existing information is filled in for you. On this page you can change your password, email address, or any other information (bibliography, interests, skills, etc.) or upload a new picture.
+          o When you click submit an email will be sent to you to notify you of the change.
+
+   1.6. Researcher Search Page /researcher/find/BySkillsAndInterests/form
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o This page allows you to search for other researchers based on interests and skills.
+
+   1.7. Researcher Search Results Page / List All Researchers Page
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o This page will list the researchers in the database that match your search criteria (or show all of them if you clicked "List All Researchers". There will be a link to view the details for each of the researchers. This is a paginated list
+          o By default these will be sorted by last name.
+
+   1.8. Researcher Detail Page / View My Profile Page  /researcher/<someResearcherId>
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o This page shows the profile picture, name, email address, organization, title, bibliography, interests and skills for a researcher and has a link to contact them that will open up your default mail client with the researcher's email address filled in for you
+
+   1.9. Contact us page /contact
+
+          o You do not have to be logged in to see this page
+          o This page will have a form on it that will send the site admin (Amy) an email. There will be a sender field, subject field and a message field. The subject field will be a drop down that will include, for example, a subject of “My interests/skills are not listed” so that users can suggest new skills and interests. 
+
+   1.10. Admin only: Add/Edit/Delete Skills Page /skill/form
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o Here admins can add, edit or delete skills from the system
+
+   1.11. Admin only: Add/Edit/Delete Interests Page /interest/form
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o Here admins can add, edit or delete interests from the system
+
+   1.12. List All Researchers Page /researcher
+
+          o If you are not logged in when you try to go here you will be asked to log in
+          o On this page you can see all of the researchers in the system. Each listing will have links to view the researcher's details. Admins can also edit or delete the researcher. 
+          
+ 
+2. Developing the application
+
+	This project was built with the SpringSource Toolsuite development environment (http://www.springsource.com/products/sts) 
+	with: 
+	Java version: 1.6.0_15 
+	Spring 3.0.0 RC 1
+	Spring Roo 1.0.0.RELEASE
+	Apache Maven 2.2.1 (rdebian-1)
+	Roo 1.0.0.RELEASE [rev 564]
+	
+	To run the tests you will need a postgres database. We used PostgreSQL 8.4.2
+	
+	To build the application from source you will at least need Java and Maven installed. For development work on the project you will need Roo installed and we recommend the STS development environment. More information and downloads available at http://www.springsource.org/roo
+	
+	To build the application you either need to use maven commands "mvn package" or open a Roo shell in the root directory of this project and use the "perform package" command. Roo uses maven for building and dependency management so you will also have to install Maven either way.
+	
+	Maven will handle downloading the correct dependencies for you.
+	
+	To run the tests you can use the mvn test command or perform test from a Roo shell. You will need to have a test database (postgres). See META-INF/spring/database.properties for info about where to put the test database config file.
+	
+3. Build and Installation process
+
+	This application needs a postgresql database and an application server to run in. We tested it using these versions: 
+		PostgreSQL 8.4.2
+		Apache Tomcat 6.0.16
+		
+	The following are the steps to build and deploy the application assuming you already have Java, Maven, Tomcat and Postresql installed correctly and have a copy of the source code:
+ 
+    3.1 Replace placeholders with your actual configuration information and desired app name
+    	* We have used these placeholders at various places in the code and below in the sample tomcat config:
+    		WHERETHEAPPLICATIONWILLBEHOSTED - should be the domain where your application will be hosted. For example localhost:8080 or goodwin.drexel.edu
+    		YOURMAILSERVER - your mailserver
+    		DBURL, DBUSERNAME, DBPASSWORD - the postgres database url, username and password
+    		RECAPTCHAPRIVATEKEY - your private key from http://www.google.com/recaptcha
+    		RECAPTCHAPUBLICKEY- your public key from http://www.google.com/recaptcha
+		  These will all need to be replaced with real values before you can successfully launch the application.
+    	* You will want to edit src/main/resources/META-INF/spring/email.properties to set the email from address and admin emails.
+    	* If you rename the app you may want to change the banner and favicon. You can find these at src/main/webapp/images/banner-graphic.png and src/main/webapp/images/favicon.png
+    	* You may also want to change the name of the application. Throughout the code we have referred to the application as "Community Profile Database". If you would like to use a different app name for the publicly visible pages you should be able to find and replace that string.
+    	* When deployed the app url will be http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd by default. If you would like to change this edit the finalName in pom.xml
+	3.2 Create a postgresql database for the application. Remember the database name, the url of the database and the username and password of the database owner.
+		Assuming you are logged in as the postgres user and are in the psql client you can use these commands:      
+	        
+	        postgres=# create user DBUSERNAME with password 'DBPASSWORD';
+			postgres=# create database DBNAME;
+			postgres=# grant all on database DBNAME to DBUSERNAME;
+		
+		(the DBNAME is the end part of the DBURL)
+		
+		Run the createschema.sql script to create the schema for your new database. Note: you will need to change the DBUSERNAME in that script first.	
+	3.3 Generate the war file. If you have installed maven correctly the command "mvn test" will run the tests and "mvn package" will generate the war file for your to deploy. You should be in the root of the project folder when you execute these commands. Alternatively you could open a Roo shell in the root of the source code directory and enter the commands "perform test" to run the tests and "perform package" to create a war file named cpd.war in the target directory
+	3.4 Copy the war file to your tomcat webapps directory.
+	3.5 Edit your server.xml file to add these settings inside the GlobalNamingResources tags. You will want to use your own environment info (YOURMAILSERVER, WHERETHEAPPLICATIONWILLBEHOSTED) and database connection information (DBPASSWORD, DBUSERNAME, DBURL):
+                  
+            <Resource
+               auth="Container"
+               driverClassName="org.postgresql.Driver"
+               maxActive="100"
+               maxIdle="30"
+               maxWait="10000"
+               name="jdbc/CpdDataSource"
+               password="DBPASSWORD"
+               type="javax.sql.DataSource"
+               url="jdbc:postgresql://DBURL"
+               username="DBUSERNAME"
+             />
+
+             <Environment name="cpdEmailHost"            type="java.lang.String" value="YOURMAILSERVER"/>
+             <Environment name="cpdApplicationUrl"            type="java.lang.String" value="http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd"/>
+             <Environment name="cpdHibernateHbm2DdlAuto"            type="java.lang.String" value="validate"/>
+             <Environment name="cpdHibernateDialect"            type="java.lang.String" value="org.hibernate.dialect.PostgreSQLDialect"/>
+	3.6 When your tomcat server starts up you should be able to see the application at http://WHERETHEAPPLICATIONWILLBEHOSTED/cpd
